@@ -72,7 +72,7 @@ public class PlayerOptions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        PauseController.paused = false;
         //controls the text that shows user what the current value is 
         if (identity == INFO.RedSpeed)
         {

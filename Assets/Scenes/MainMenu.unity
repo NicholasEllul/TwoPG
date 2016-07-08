@@ -1069,7 +1069,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 342719831}
-        m_MethodName: DirectSwitch
+        m_MethodName: OptionsSwitch
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

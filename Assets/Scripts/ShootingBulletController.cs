@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ShootingBulletController : MonoBehaviour {
 
+
+  
+
     int frame;
     GameObject myObj;
     public static int RedAmmo;
@@ -51,12 +54,22 @@ public class ShootingBulletController : MonoBehaviour {
         shot = false;
         Destroy(this.gameObject);
     }
+   
 
     public void Shoot()
     {
         if (PauseController.paused == false)
         {
-
+            //fixes glitch where users can spam shoot button while game is loading and shoot multiple bulletss
+            //rather than patching it ive just refined it so that i can exploit it.
+            if (ShootingGameController.redAmmo < 0)
+            {
+                ShootingGameController.redAmmo = 0;
+            }
+            if (ShootingGameController.blueAmmo < 0)
+            {
+                ShootingGameController.blueAmmo = 0;
+            }
 
             if (myId == ID.Red && RedAmmo > 0)
             {

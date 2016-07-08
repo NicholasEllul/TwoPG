@@ -68,10 +68,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BulletController.cs" />
     <Compile Include="Assets\Scripts\Death.cs" />
+    <Compile Include="Assets\Scripts\DeathUnified.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
-    <Compile Include="Assets\Scripts\READ ME.cs" />
+    <Compile Include="Assets\Scripts\PauseController.cs" />
+    <Compile Include="Assets\Scripts\PlayerOptions.cs" />
+    <Compile Include="Assets\Scripts\RandomLocation.cs" />
     <Compile Include="Assets\Scripts\Rotate.cs" />
+    <Compile Include="Assets\Scripts\ScoreUpdater.cs" />
+    <Compile Include="Assets\Scripts\ShootingBulletController.cs" />
+    <Compile Include="Assets\Scripts\ShootingGameController.cs" />
     <Compile Include="Assets\Scripts\SwitchDelay.cs" />
     <Compile Include="Assets\Scripts\TextUpdater.cs" />
     <Compile Include="Assets\Scripts\Winner.cs" />
