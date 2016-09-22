@@ -1,4 +1,6 @@
-﻿/*
+﻿
+
+/*
  * Created by: Nicholas Ellul
  * Created on: 18-Dec-2015
  * Created for: ICS3U
@@ -100,15 +102,9 @@ public class Death : MonoBehaviour {
       
         animEH.Play("Spawn");
         numberOfLivingPlayers +=1;
-        alive = true; 
-        
-    }
+        alive = true;
+        Rotate.controlsEnabled = true;
 
-    IEnumerator CountDown(float time)
-    {
-        //freeze players while the 
-        yield return new WaitForSeconds(time);
-        Rotate.controlsEnabled = true; 
     }
 
     IEnumerator FreezeRespawn(int seconds)
