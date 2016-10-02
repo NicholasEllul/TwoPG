@@ -99,7 +99,7 @@ public class Rotate : MonoBehaviour
         }
 
         //if player is still active and game is not paused
-        if(Death.numberOfLivingPlayers >= 2 & PauseController.paused == false)
+		if(Death.alive == true & PauseController.paused == false)
         {
             //if button is being clicked
             if (_clicked == true)

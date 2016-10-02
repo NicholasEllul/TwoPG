@@ -4,9 +4,11 @@
  * Created for: ICS3U
  * Final Assignemnt
  * This file contains code that controls everything involving the pause menu.
+ * Code updated Oct 2016 by Nicholas Ellul
 */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PauseController : MonoBehaviour {
@@ -16,29 +18,39 @@ public class PauseController : MonoBehaviour {
 
     public void MainMenu()
     {//returns to main menu
+		
         paused = false;
-        Application.LoadLevel("MainMenu");
+		SceneManager.LoadScene("MainMenu");
+
     }
 
     public void RestartGame()
     {//restarts game
+		
         paused = false;
-        Application.LoadLevel(Application.loadedLevelName);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
     public void PauseGame()
     {//toggles pause
+		
         if(paused == false)
         {
      
-           this.gameObject.SetActive(true);
+            this.gameObject.SetActive(true);
             paused = true;
+
         }
         else { 
-        paused = false;
+			
+        	paused = false;
             this.gameObject.SetActive(false);
+
         }
+
         Debug.Log("Toggle");
-    }
+    
+	}
 
 	// Use this for initialization
 	void Start () {

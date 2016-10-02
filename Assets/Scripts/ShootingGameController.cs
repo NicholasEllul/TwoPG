@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class ShootingGameController : MonoBehaviour {
+	
     Transform location;
     public float movementSpeed;
+	bool switched = false;
     int limitUpper;
     int limitLower;
-    bool switched = false;
     public STARTINGDIRECTION start;
     public static int redAmmo;
     public static int blueAmmo;
@@ -35,18 +36,21 @@ public class ShootingGameController : MonoBehaviour {
     }
 
 
-    IEnumerator AmmoRegen(float time)
+    public IEnumerator AmmoRegen(float time)
     {
+		GameInfoController.toggleThisVisibility("ReloadingText");
 
         yield return new WaitForSeconds(time);
         if(audioPlayer.isPlaying == false)
         {
             audioPlayer.PlayOneShot(replenish, 1);
         }
-         redAmmo = PlayerPrefs.GetInt("RedBullet");
+
+        redAmmo = PlayerPrefs.GetInt("RedBullet");
         blueAmmo = PlayerPrefs.GetInt("BlueBullet");
         refilling = false;
-       
+
+		GameInfoController.toggleThisVisibility("ReloadingText");
     }
 
     void CheckAmmo()
@@ -67,6 +71,7 @@ public class ShootingGameController : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+		
         location = GetComponent<Transform>();
         audioPlayer = GetComponent < AudioSource > ();
         redAmmo = PlayerPrefs.GetInt("RedBullet");
@@ -74,22 +79,19 @@ public class ShootingGameController : MonoBehaviour {
         numberOfBlockers = PlayerPrefs.GetInt("BlockerCount");
         SpawnBlockers(numberOfBlockers);
 
-       
-
     }
    
     // Update is called once per frame
     void Update () {
         if(PauseController.paused == false)
         {
-                CheckAmmo();
-                location.Translate(0,movementSpeed,0);
-                if(transform.position.y > 3.7 || transform.position.y < -1.0)
-                {
-                    movementSpeed = movementSpeed * (-1);
-                    switched = true;
-            
-                }
+        	CheckAmmo();
+            location.Translate(0,movementSpeed,0);
+            if(transform.position.y > 3.7 || transform.position.y < -1.0)
+            {
+                movementSpeed = movementSpeed * (-1);
+                switched = true;
+            }
         }
         
     }

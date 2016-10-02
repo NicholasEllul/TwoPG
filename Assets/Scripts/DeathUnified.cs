@@ -4,7 +4,8 @@
  * Created for: ICS3U
  * Final Assignemnt
  * This file contains code that controls what happens when a player dies. this will
- hopefully be more portable than the other death file.
+ * hopefully be more portable than the other death file.
+ * Code updated Oct 2016 by Nicholas Ellul
 */
 
 using UnityEngine;
@@ -41,18 +42,23 @@ public class DeathUnified : MonoBehaviour
         {
             if(TextUpdater.redScore > 5)
             {
+				
                 TextUpdater.redScore = 5;
-            }
+
+			}
 
             if (TextUpdater.blueScore > 5)
             {
-                TextUpdater.blueScore = 5;
-            }
+            
+				TextUpdater.blueScore = 5;
+            
+			}
 
             GameObject.Find("WhiteLayer").GetComponent<Text>().text = "GAME OVER!";
             GameObject.Find("BlackLayer").GetComponent<Text>().text = "GAME OVER!";
             PauseController.paused = true;
             StartCoroutine(GoToResultScene(2));
+
         }
         else
         {
