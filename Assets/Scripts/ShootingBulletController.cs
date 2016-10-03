@@ -5,7 +5,8 @@ public class ShootingBulletController : MonoBehaviour {
 
 
   
-
+	GameObject redGuy;
+	GameObject blueGuy;
     int frame;
     GameObject myObj;
     public static int RedAmmo;
@@ -30,6 +31,9 @@ public class ShootingBulletController : MonoBehaviour {
 	void Start () {
          RedAmmo = PlayerPrefs.GetInt("RedBullet");
          BlueAmmo = PlayerPrefs.GetInt("BlueBullet");
+
+		redGuy = GameObject.Find ("Red");
+		blueGuy = GameObject.Find ("Blue");
 
         Application.targetFrameRate = 60;
         offset = new Vector3(-1, 0, 0);
@@ -71,36 +75,36 @@ public class ShootingBulletController : MonoBehaviour {
                 ShootingGameController.blueAmmo = 0;
             }
 
-            if (myId == ID.Red && RedAmmo > 0)
+			if (myId == ID.Red && ShootingGameController.redAmmo > 0)
             {
-                
+				Debug.Log ("red ammo" + ShootingGameController.redAmmo);
                 ShootingGameController.redAmmo--;
                 shot = true;
                 Instantiate(bulletPrefab, myObj.transform.position - offset, myRotation);
                 //    transform.position = myObj.transform.position;
                 audioPlayer.PlayOneShot(shoot);
             }
-            else if (myId == ID.Red && RedAmmo < 1)
+			else if (myId == ID.Red && ShootingGameController.redAmmo < 1)
             {
-                Debug.Log("IH");
-                GameObject.Find("Red").GetComponent<ShootingGameController>().ToggleDirection();
+               // Debug.Log("IH");
+				redGuy.GetComponent<ShootingGameController>().ToggleDirection();
             }
 
-            if (myId == ID.Blue && BlueAmmo > 0)
+            if (myId == ID.Blue && ShootingGameController.blueAmmo > 0)
             {
                 ShootingGameController.blueAmmo--;
                 shot = true;
                 Instantiate(bulletPrefab, myObj.transform.position + offset, myRotation);
                 audioPlayer.PlayOneShot(shoot);
             }
-            else if (myId == ID.Blue && BlueAmmo < 1)
+			else if (myId == ID.Blue && ShootingGameController.blueAmmo < 1)
             {
-                Debug.Log("IH");
-                GameObject.Find("Blue").GetComponent<ShootingGameController>().ToggleDirection();
+             //   Debug.Log("IH");
+				blueGuy.GetComponent<ShootingGameController>().ToggleDirection();
             }
 
-            Debug.Log(RedAmmo + " Red");
-            Debug.Log(BlueAmmo + " Blue");
+          //  Debug.Log(RedAmmo + " Red");
+          //  Debug.Log(BlueAmmo + " Blue");
             // CheckAmmo()
         }
     }
@@ -124,17 +128,17 @@ public class ShootingBulletController : MonoBehaviour {
             {
                 TextUpdater.blueScore = TextUpdater.blueScore + 1;
                 Hitsound();
-                Debug.Log("Crash RED");
+            //    Debug.Log("Crash RED");
             }
 
             if(other.gameObject.transform.name == "Blue" && gameObject.tag != "Blocker")
             {
                 TextUpdater.redScore = TextUpdater.redScore + 1;
                 Hitsound();
-                Debug.Log("Crash Blue");
+             //   Debug.Log("Crash Blue");
             }
 
-            Debug.Log("Crash");
+           // Debug.Log("Crash");
             Destroy(this.gameObject);
         }
        
@@ -142,7 +146,7 @@ public class ShootingBulletController : MonoBehaviour {
     }
 
     void Update () {
-        
+		Debug.Log(ShootingGameController.redAmmo);
         RedAmmo = ShootingGameController.redAmmo;
         BlueAmmo = ShootingGameController.blueAmmo;
         if (PauseController.paused == false)

@@ -8,6 +8,7 @@
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -54,7 +55,9 @@ public class PauseController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-   
+		GameObject[] infoObjs = GameObject.FindGameObjectsWithTag("Info");
+		Debug.Log (infoObjs[0].name);
+		infoObjs [0].GetComponent<Text>().enabled = false;
 
 	}
 	

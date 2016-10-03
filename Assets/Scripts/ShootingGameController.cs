@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ShootingGameController : MonoBehaviour {
@@ -13,7 +14,7 @@ public class ShootingGameController : MonoBehaviour {
     public static int blueAmmo;
     public AudioClip replenish;
     AudioSource audioPlayer;
-    bool refilling = false;
+	static bool refilling = false;
 
     int numberOfBlockers;
     public UnityEngine.Object blockerPrefab;
@@ -32,29 +33,42 @@ public class ShootingGameController : MonoBehaviour {
             Instantiate(blockerPrefab);
             counter--;
         }
-        //
+        
     }
 
+	public void toggleInfoText(string objName,bool status){
+		//finds and toggles the text of an info UI element
+		Debug.Log("HOKE");
+		GameObject[] infoObjs = GameObject.FindGameObjectsWithTag("Info");
+		infoObjs [0].GetComponent<Text>().enabled = false;
+		foreach (GameObject iterator in infoObjs) {
+			if (iterator.name == objName) {
+				iterator.GetComponent<Text> ().enabled = status;
+			}
+		}
 
-    public IEnumerator AmmoRegen(float time)
-    {
-		GameInfoController.toggleThisVisibility("ReloadingText");
+	}
 
+	public IEnumerator AmmoRegen(float time)
+	{
+		//regenerates the ammo of the players after a delay.
+		toggleInfoText("ReloadingText",true);
         yield return new WaitForSeconds(time);
         if(audioPlayer.isPlaying == false)
         {
             audioPlayer.PlayOneShot(replenish, 1);
         }
-
+		toggleInfoText("ReloadingText",false);
         redAmmo = PlayerPrefs.GetInt("RedBullet");
         blueAmmo = PlayerPrefs.GetInt("BlueBullet");
         refilling = false;
 
-		GameInfoController.toggleThisVisibility("ReloadingText");
     }
 
     void CheckAmmo()
     {
+		//checks if ammo needs to be replensished
+
         if (redAmmo == 0 && blueAmmo == 0 && refilling == false)
         {
             refilling = true;
@@ -72,6 +86,11 @@ public class ShootingGameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+		//Transform test = transform.Find("ReloadingText");
+		//test.GetComponent(GameInfoController).BroadcastMessage("toggleThisVisibility");
+		//Debug.Log(test.name);
+
+
         location = GetComponent<Transform>();
         audioPlayer = GetComponent < AudioSource > ();
         redAmmo = PlayerPrefs.GetInt("RedBullet");
