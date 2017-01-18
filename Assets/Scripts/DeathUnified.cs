@@ -15,7 +15,6 @@ using UnityEngine.UI;
 public class DeathUnified : MonoBehaviour
 {
 
-    public string _stage;
     public static int scoreToWin = 5;
     void Start()
     {
