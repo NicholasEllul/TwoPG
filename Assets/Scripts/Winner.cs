@@ -33,6 +33,7 @@ public class Winner : MonoBehaviour
     {
         //figure out what game was just played and get the score from it
         lastScene = PlayerPrefs.GetString("lastScene");
+		Debug.Log (lastScene);
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         //assign colour of spinning player to the colour of the winner

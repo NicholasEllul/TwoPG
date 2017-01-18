@@ -3,7 +3,7 @@
  * Created on: 18-Dec-2015
  * Created for: ICS3U
  * Final Assignemnt
- * This contains player movement for lava game.
+ * This contains player movement for lava game and soccer game.
 */
 
 using UnityEngine;
@@ -17,15 +17,22 @@ public class Rotate : MonoBehaviour
     public AudioClip crash;
     public float volume;
 
+	// Only enable fixed speed if you are 
+	// manually setting the rotation and thrust
+	public bool fixedSpeed = false;
+	public int _rotationCoefficiant;
+	public int _thrust;
+
     private Rigidbody2D rb;
     private AudioSource _audi;
     private bool _clicked = false;
-    private int _rotationCoefficiant;
-    private int _thrust;
+
+
 
     public static bool controlsEnabled = true;
     public static byte scoreDebug = 1;
     public static bool paused = false;
+
     public enum DIRECTION
     {
         left,
@@ -42,6 +49,7 @@ public class Rotate : MonoBehaviour
     { //enable forward movement
         if (controlsEnabled == true)
         {
+
             _clicked = true;
         }
 
@@ -77,7 +85,10 @@ public class Rotate : MonoBehaviour
         controlsEnabled = true;
         rb = GetComponent<Rigidbody2D>();
         _audi = GetComponent<AudioSource>();
-        UpdateMySpeed();
+
+		if (fixedSpeed == false) {
+			UpdateMySpeed ();
+		}
     }
 
 
