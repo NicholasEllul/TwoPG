@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 284157581}
   - component: {fileID: 284157582}
   - component: {fileID: 284157583}
+  - component: {fileID: 284157584}
   m_Layer: 0
   m_Name: 8BITsoccerball
   m_TagString: Untagged
@@ -810,6 +811,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81098323fae64f9f91ca04b99dbeb14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goalSound: {fileID: 8300000, guid: ac69b1d7f1643435dbb7568a85228941, type: 3}
+  kickSound: {fileID: 8300000, guid: a43920bb50f25480ea15c0166c2f36b1, type: 3}
 --- !u!111 &284157583
 Animation:
   m_ObjectHideFlags: 0
@@ -826,6 +829,86 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!82 &284157584
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 284157577}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 89e20bf0e19814b05afec915eb2a81bc, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &288305204
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,8 +1076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3fd75d9d854b34abc1eba5554d2d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animEH: {fileID: 320380002}
-  grunt: {fileID: 8300000, guid: d115eeeff56668d4fbcad971c205ca35, type: 3}
+  animEH: {fileID: 0}
+  grunt: {fileID: 0}
 --- !u!82 &320380001
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1761,8 +1844,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896dcc192ba25fa47851ce8d1fa67d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: 2
-  seconds: 2.5
+  colour: 0
+  seconds: 0
 --- !u!114 &686670816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2221,7 +2304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896dcc192ba25fa47851ce8d1fa67d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: 1
+  colour: 0
   seconds: 0
 --- !u!114 &872915104
 MonoBehaviour:
@@ -4086,7 +4169,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 135204, guid: 4da15d1ace996b440ab5a37115761886, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 465550, guid: 4da15d1ace996b440ab5a37115761886, type: 2}
       propertyPath: m_LocalScale.z
@@ -4896,8 +4979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3fd75d9d854b34abc1eba5554d2d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animEH: {fileID: 2047292075}
-  grunt: {fileID: 8300000, guid: d115eeeff56668d4fbcad971c205ca35, type: 3}
+  animEH: {fileID: 0}
+  grunt: {fileID: 0}
 --- !u!82 &2047292074
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5232,7 +5315,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 135204, guid: 4da15d1ace996b440ab5a37115761886, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 21223774, guid: 4da15d1ace996b440ab5a37115761886, type: 2}
       propertyPath: m_Sprite

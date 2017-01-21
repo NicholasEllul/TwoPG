@@ -26,10 +26,11 @@ public class MainMenuController : MonoBehaviour {
     
 
     public void Hide()
-    {//toggle the about menu
+    {
+		//toggle the about menu
         if(hidden == false)
         {
-			
+
         	objToHide.SetActive(false);
         	objToShow.SetActive(true);
         	hidden = true;
@@ -51,24 +52,14 @@ public class MainMenuController : MonoBehaviour {
     {
     	//Switch to a scene instantly
 		SceneManager.LoadScene(scene);
-
-		//StartCoroutine(SceneSwitch(waitTime,scene));
-    
 	}
 
     // Use this for initialization
     void Start()
-    {
-		
-        hidden = false;
-        TextUpdater.redScore = 0;
-        TextUpdater.blueScore = 0;
+	{
+		hidden = false;
+		TextUpdater.redScore = 0;
+		TextUpdater.blueScore = 0;
     
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

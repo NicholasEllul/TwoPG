@@ -22,16 +22,6 @@ public class RandomLocation : MonoBehaviour {
     float myX;
     float myY;
 
-	private int generatorHelper(int number){
-		//work in progress
-		if (number < 0) {
-			return number + 1;
-		}
-		else{
-			return number - 1;
-		}
-	}
-
     float generator(UnityEngine.Random rngg, int lowerBound, int upperBound)
     {
         //make upper and lower bound 1 unit inside since the decimal will add onto it
@@ -59,12 +49,12 @@ public class RandomLocation : MonoBehaviour {
 
         myTransform = GetComponent<Transform>();
 
+		// generate X within the boundery
 		location.x = generator(rng,-3,2);
-      //  location.x = -7.0f;
+   		
+		// generate Y within the boundery
 		location.y = generator(rng, -1, 3);
-      //Debug.Log(location.x);
-        //location.y = 0;
-        //location.z = 0;
+  
         myTransform.position = location;
        
 	}

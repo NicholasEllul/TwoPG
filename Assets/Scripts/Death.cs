@@ -46,13 +46,11 @@ public class Death : MonoBehaviour {
 		PauseController.paused = false;
         _audi = GetComponent<AudioSource>();
 
-		PlayerPrefs.SetString("lastScene",  SceneManager.GetActiveScene().name);
-
     }
 
     public void Rip()
     {
-        //declare object as "dead" and update score
+        //declare object as "dead" and play the appropriate sounds and animations
         alive = false;
 		Rotate.controlsEnabled = false;
 		_audi.PlayOneShot(grunt,1);
@@ -96,6 +94,7 @@ public class Death : MonoBehaviour {
             //if score reaches its limit, show cool 3d game over text
             GameObject.Find("WhiteLayer").GetComponent<Text>().text = "GAME OVER!";
             GameObject.Find("BlackLayer").GetComponent<Text>().text = "GAME OVER!";
+			// Go to results
             StartCoroutine(GoToResultScene(2));
 
         }
@@ -104,14 +103,14 @@ public class Death : MonoBehaviour {
 
     IEnumerator Respawn(int seconds)
     {
-        //freeze players and activate respawn
-//        alive = false;
+        //freeze players and activates respawn
         yield return new WaitForSeconds(seconds);      
 
 		//go back to spawn position
 		transform.position = _respawnLocation;
 		transform.rotation = _respawnRotation;
 
+		// Play spawn animaiton and revive character
 		animEH.Play("Spawn");
 		alive = true;
 		Rotate.controlsEnabled = true;
@@ -138,7 +137,7 @@ public class Death : MonoBehaviour {
         }
         else if (alive == false)
         {
-           
+           // Run the respawn process
 			StartCoroutine(Respawn(4));
            
         }

@@ -505,7 +505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01209a1e6aa357642aabeee8d89f8059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stage: YouWin
 --- !u!1 &62067175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,14 +2965,14 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1480194658}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c6acc485edb73d14295a18de40ab10e2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

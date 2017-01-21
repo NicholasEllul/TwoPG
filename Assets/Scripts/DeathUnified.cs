@@ -10,6 +10,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DeathUnified : MonoBehaviour
@@ -18,14 +19,13 @@ public class DeathUnified : MonoBehaviour
     public static int scoreToWin = 5;
     void Start()
     {
-        PlayerPrefs.SetString("lastScene", Application.loadedLevelName);
-
+		
     }
 
     protected IEnumerator GoToResultScene(int seconds)
     {
         //after a pause move onto the result scene
-        Debug.Log("Loaded");
+  
         yield return new WaitForSeconds(seconds);
         PauseController.paused = false;
         GameObject.Find("WhiteLayer").GetComponent<Text>().text = "";
@@ -37,8 +37,10 @@ public class DeathUnified : MonoBehaviour
 
     void Update()
     {
+		// If a player has a winning score
         if (TextUpdater.redScore >= scoreToWin|TextUpdater.blueScore >= scoreToWin)
         {
+			// Sets it to 5 to prevent additional bullets hitting and increasing it past 5
             if(TextUpdater.redScore > 5)
             {
 				

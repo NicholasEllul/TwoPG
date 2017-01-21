@@ -16,11 +16,11 @@ public class ScoreUpdater : MonoBehaviour {
         Blue,
         None
     }
-    // Use this for initialization
-
 
     void Start () {
         _score = GetComponent<Text>();
+
+		// Initialize the object with the appropriate score.
         if (gameObject.name == "RedScore")
         {
             colour = TEAM.Red;
@@ -31,7 +31,6 @@ public class ScoreUpdater : MonoBehaviour {
         }
         else
         {
-            //    StartCoroutine(Dissapear(seconds));
             Debug.Log("Grey area");
         }
     }

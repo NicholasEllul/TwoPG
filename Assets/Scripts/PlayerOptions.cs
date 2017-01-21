@@ -35,13 +35,35 @@ public class PlayerOptions : MonoBehaviour {
         BlueSpeed,
         RedBullet,
         BlueBullet,
-        BlockerCount
+        BlockerCount,
+		DefaultButton
     }
+
+
+	void resetLavaBattle(){
+		PlayerPrefs.SetInt("RedRotation",DEFAULT_SPEEDS);
+		PlayerPrefs.SetInt("RedSpeed",DEFAULT_SPEEDS);
+		PlayerPrefs.SetInt("BlueRotation",DEFAULT_SPEEDS);
+		PlayerPrefs.SetInt("BlueSpeed",DEFAULT_SPEEDS);
+	}
+
+
+	void resetGunSlinger(){
+		PlayerPrefs.SetInt("RedBullet", DEFAULT_AMMO_CAPACITY);
+		PlayerPrefs.SetInt("BlueBullet", DEFAULT_AMMO_CAPACITY);
+		PlayerPrefs.SetInt("BlockerCount", DEFAULT_BLOCKER_COUNT);
+	}
+
 
     public void SetDefault()
     {//reset all rotation and speed values to default
-        PlayerPrefs.SetInt("Start",0);
-        Start();
+       
+		if (gameObject.name == "resetLava") {
+			resetLavaBattle ();
+		}
+		if (gameObject.name == "resetGunSlinger") {
+			resetGunSlinger ();
+		}
 
     }
 
@@ -50,38 +72,37 @@ public class PlayerOptions : MonoBehaviour {
 
         int value = int.Parse(nameOfInput.text);
         PlayerPrefs.SetInt(nameOfInput.name, value);
-        Debug.Log(nameOfInput.name + " "+ nameOfInput.text);
 
     }
 
     void CheckPopulate()
     {
-        //if no value has been given for each speed, populate those speeds with default values.
+        //if no value has been given for each option, populate those options with default values.
 
         int firstTimePlaying= PlayerPrefs.GetInt("Start");
         
 		if(firstTimePlaying == 0)
         {
 			
-			PlayerPrefs.SetInt("RedRotation",DEFAULT_SPEEDS);
-			PlayerPrefs.SetInt("RedSpeed",DEFAULT_SPEEDS);
-			PlayerPrefs.SetInt("BlueRotation",DEFAULT_SPEEDS);
-			PlayerPrefs.SetInt("BlueSpeed",DEFAULT_SPEEDS);
+			resetGunSlinger ();
+			resetLavaBattle ();
+
             PlayerPrefs.SetInt("Start", 1);
 
-			PlayerPrefs.SetInt("RedBullet", DEFAULT_AMMO_CAPACITY);
-			PlayerPrefs.SetInt("BlueBullet", DEFAULT_AMMO_CAPACITY);
-			PlayerPrefs.SetInt("BlockerCount", DEFAULT_BLOCKER_COUNT);
 
         }
     }
 	// Use this for initialization
 	void Start () {
 		
+		// Get required data
         PauseController.paused = false;
-        CheckPopulate();
-        _infoText = GetComponent<Text>();
-        _myName = gameObject.name;  
+		_infoText = GetComponent<Text>();
+		_myName = gameObject.name;  
+
+		// Check if the values for the options are populated
+		CheckPopulate();
+     
 
     }
 	
