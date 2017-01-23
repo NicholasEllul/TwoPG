@@ -58,7 +58,7 @@ public class PauseController : MonoBehaviour {
 		
 		paused = false;
 		GameObject[] infoObjs = GameObject.FindGameObjectsWithTag("Info");
-		infoObjs [0].GetComponent<Text>().enabled = false;
+		infoObjs[0].GetComponent<Text>().enabled = false;
 
 	}
 	

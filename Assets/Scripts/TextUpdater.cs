@@ -24,8 +24,11 @@ public class TextUpdater : MonoBehaviour {
 
 	public static int blueScore;
 	public static int redScore;
-	GAME currentGame;
-	string scoredScene = "";
+
+	private GAME currentGame;
+	private string scoredScene = "";
+
+	[SerializeField]
 	private Text _score;
 
 	enum GAME
