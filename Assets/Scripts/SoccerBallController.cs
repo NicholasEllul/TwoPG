@@ -16,7 +16,6 @@ public class SoccerBallController : MonoBehaviour {
 
 	// accessable from the editor 
 	public AudioClip goalSound;
-
 	public AudioClip kickSound;
 
 	// constants for the goal line

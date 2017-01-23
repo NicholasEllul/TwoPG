@@ -22,22 +22,27 @@ public class RandomLocation : MonoBehaviour {
     float myX;
     float myY;
 
-    float generator(UnityEngine.Random rngg, int lowerBound, int upperBound)
+    private float getRandomFloat(UnityEngine.Random rngg, int lowerBound, int upperBound)
     {
-        //make upper and lower bound 1 unit inside since the decimal will add onto it
-        //ex if limit is 13 put 12 since it could add + 0.99
-        //however if the number is negative, you dont want to overshoot at all. If the limit is -13
-        //you will want to put -13 since the + 0.xx will bring it down since its positive
+		//If its > 0, make upper/lower bound 1 unit less
+		//I do this since the decimal will add onto it and bring it up potentially 0.99.
+		//ex if limit is 13 I make it 12 since it could add + 0.99 during the next step
+		if (lowerBound > 0) {
+			lowerBound--;
+		}
+		if (upperBound > 0) {
+			upperBound--;
+		}
 
-
-
+		// the integer part
         float firstPart = UnityEngine.Random.Range(lowerBound,upperBound);
+		// the decimal part
         float secondPart = UnityEngine.Random.Range(0, 99);
-
         secondPart = secondPart / 100;
+
+		// the sum
         float sum = firstPart + secondPart;
 
-        Debug.Log(firstPart);
         return sum;
     }
 
@@ -49,11 +54,13 @@ public class RandomLocation : MonoBehaviour {
 
         myTransform = GetComponent<Transform>();
 
+		// The RNG you pass in below must be static
+
 		// generate X within the boundery
-		location.x = generator(rng,-3,2);
+		location.x = getRandomFloat(rng,-3,2);
    		
 		// generate Y within the boundery
-		location.y = generator(rng, -1, 3);
+		location.y = getRandomFloat(rng, -1, 3);
   
         myTransform.position = location;
        

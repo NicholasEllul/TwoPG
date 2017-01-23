@@ -12,7 +12,7 @@ using System.Collections;
 
 public class ShootingGameController : MonoBehaviour {
 	
-    Transform location;
+
     public float movementSpeed;
 
     int limitUpper;
@@ -21,10 +21,11 @@ public class ShootingGameController : MonoBehaviour {
     public static int redAmmo;
     public static int blueAmmo;
     public AudioClip replenish;
-    AudioSource audioPlayer;
-
+    
+	private AudioSource audioPlayer;
+	private Transform location;
 	// States if the script is in the process of refillign ammo.
-	static bool refilling = false;
+	private static bool refilling = false;
 
     int numberOfBlockers;
     public UnityEngine.Object blockerPrefab;

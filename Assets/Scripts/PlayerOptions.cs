@@ -68,7 +68,8 @@ public class PlayerOptions : MonoBehaviour {
     }
 
     public void SaveSetting(InputField nameOfInput)
-    {//save the value the user wanted as a speed
+    {
+		//save the value the user just set
 
         int value = int.Parse(nameOfInput.text);
         PlayerPrefs.SetInt(nameOfInput.name, value);
