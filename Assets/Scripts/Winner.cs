@@ -12,27 +12,34 @@
  * the score from lava battle or gun slinger.
  */
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using System.Collections;
 
 public class Winner : MonoBehaviour
 {
+
+	public static string lastScene;
+
     private SpriteRenderer _mySpriteRenderer;
-    public static string lastScene;
+	private const float ROTATION_SPEED = 70f;
+
 
     public void ReplayGame()
     {//replay level
-        Application.LoadLevel(lastScene);
+		SceneManager.LoadScene(lastScene);
     }
 
     public void MainMenu()
     {
-        Application.LoadLevel("MainMenu");
+		SceneManager.LoadScene("MainMenu");
     }
     // Use this for initialization
     void Start()
     {
         //figure out what game was just played and get the score from it
         lastScene = PlayerPrefs.GetString("lastScene");
+		Debug.Log (lastScene);
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
 
         //assign colour of spinning player to the colour of the winner
@@ -49,6 +56,7 @@ public class Winner : MonoBehaviour
   
     void Update()
     {
-        transform.Rotate(0, 0, 70 * Time.deltaTime);
+		
+        transform.Rotate(0, 0, ROTATION_SPEED * Time.deltaTime);
     }
 }

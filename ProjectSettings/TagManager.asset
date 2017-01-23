@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Blocker
   - Player
+  - Info
+  - SoccerWall
   layers:
   - Default
   - TransparentFX

@@ -4,28 +4,28 @@
  * Created for: ICS3U
  * Final Assignemnt
  * This file contains code that controls what happens when a player dies. this will
- hopefully be more portable than the other death file.
+ * hopefully be more portable than the other death file.
+ * Code updated Oct 2016 by Nicholas Ellul
 */
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DeathUnified : MonoBehaviour
 {
 
-    public string _stage;
     public static int scoreToWin = 5;
     void Start()
     {
-        PlayerPrefs.SetString("lastScene", Application.loadedLevelName);
-
+		
     }
 
     protected IEnumerator GoToResultScene(int seconds)
     {
         //after a pause move onto the result scene
-        Debug.Log("Loaded");
+  
         yield return new WaitForSeconds(seconds);
         PauseController.paused = false;
         GameObject.Find("WhiteLayer").GetComponent<Text>().text = "";
@@ -37,22 +37,29 @@ public class DeathUnified : MonoBehaviour
 
     void Update()
     {
+		// If a player has a winning score
         if (TextUpdater.redScore >= scoreToWin|TextUpdater.blueScore >= scoreToWin)
         {
+			// Sets it to 5 to prevent additional bullets hitting and increasing it past 5
             if(TextUpdater.redScore > 5)
             {
+				
                 TextUpdater.redScore = 5;
-            }
+
+			}
 
             if (TextUpdater.blueScore > 5)
             {
-                TextUpdater.blueScore = 5;
-            }
+            
+				TextUpdater.blueScore = 5;
+            
+			}
 
             GameObject.Find("WhiteLayer").GetComponent<Text>().text = "GAME OVER!";
             GameObject.Find("BlackLayer").GetComponent<Text>().text = "GAME OVER!";
             PauseController.paused = true;
             StartCoroutine(GoToResultScene(2));
+
         }
         else
         {

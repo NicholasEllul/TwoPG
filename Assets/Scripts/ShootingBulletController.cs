@@ -1,11 +1,20 @@
-﻿using UnityEngine;
+﻿/*
+ * Created by: Nicholas Ellul
+ * Created on: 01-July-2016
+ * Created for: ICS4U
+ * This script contains the code that the bullet prefab uses when it gets
+ * created.
+ * Code updated Oct 2016 by Nicholas Ellul
+*/
+using UnityEngine;
 using System.Collections;
 
 public class ShootingBulletController : MonoBehaviour {
 
 
   
-
+	GameObject redGuy;
+	GameObject blueGuy;
     int frame;
     GameObject myObj;
     public static int RedAmmo;
@@ -15,7 +24,6 @@ public class ShootingBulletController : MonoBehaviour {
     public Object bulletPrefab;
     Quaternion myRotation;
     public Vector3 offset;
-    bool shot = false;
     public AudioClip shoot;
     AudioSource audioPlayer;
     public AudioClip hit;
@@ -28,16 +36,25 @@ public class ShootingBulletController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-         RedAmmo = PlayerPrefs.GetInt("RedBullet");
-         BlueAmmo = PlayerPrefs.GetInt("BlueBullet");
+
+		// Get ammo
+        RedAmmo = PlayerPrefs.GetInt("RedBullet");
+        BlueAmmo = PlayerPrefs.GetInt("BlueBullet");
+
+		// Get game objects
+		redGuy = GameObject.Find ("Red");
+		blueGuy = GameObject.Find ("Blue");
+
 
         Application.targetFrameRate = 60;
+
+		// Offset for where the bullets will shoot from
         offset = new Vector3(-1, 0, 0);
-        shot = false;
         
         audioPlayer = GameObject.Find("Ground").GetComponent<AudioSource>();
         myRotation = GetComponent<Transform>().rotation;
 
+		// Get current game object
         if(myId == ID.Blue)
         {
             myObj = GameObject.Find("Blue");
@@ -51,7 +68,7 @@ public class ShootingBulletController : MonoBehaviour {
 
     void OnBecameInvisible()
     {
-        shot = false;
+		// Delete the bullet/blocker
         Destroy(this.gameObject);
     }
    
@@ -60,8 +77,8 @@ public class ShootingBulletController : MonoBehaviour {
     {
         if (PauseController.paused == false)
         {
-            //fixes glitch where users can spam shoot button while game is loading and shoot multiple bulletss
-            //rather than patching it ive just refined it so that i can exploit it.
+            //fixes glitch where users can spam shoot button while game is loading and shoot multiple bullets
+            //past ammo capacity. Rather than patching it ive just refined it so that i can have fun with it.
             if (ShootingGameController.redAmmo < 0)
             {
                 ShootingGameController.redAmmo = 0;
@@ -71,39 +88,34 @@ public class ShootingBulletController : MonoBehaviour {
                 ShootingGameController.blueAmmo = 0;
             }
 
-            if (myId == ID.Red && RedAmmo > 0)
-            {
-                
-                ShootingGameController.redAmmo--;
-                shot = true;
-                Instantiate(bulletPrefab, myObj.transform.position - offset, myRotation);
-                //    transform.position = myObj.transform.position;
-                audioPlayer.PlayOneShot(shoot);
-            }
-            else if (myId == ID.Red && RedAmmo < 1)
-            {
-                Debug.Log("IH");
-                GameObject.Find("Red").GetComponent<ShootingGameController>().ToggleDirection();
+			// Shooting code for red
+			if (myId == ID.Red){
+
+				if (ShootingGameController.redAmmo > 0) {
+					
+					ShootingGameController.redAmmo--;
+					Instantiate(bulletPrefab, myObj.transform.position - offset, myRotation);
+					audioPlayer.PlayOneShot(shoot);
+				}
+				redGuy.GetComponent<ShootingGameController>().ToggleDirection();
+
             }
 
-            if (myId == ID.Blue && BlueAmmo > 0)
+			// Shooting code for blue
+			if (myId == ID.Blue)
             {
-                ShootingGameController.blueAmmo--;
-                shot = true;
-                Instantiate(bulletPrefab, myObj.transform.position + offset, myRotation);
-                audioPlayer.PlayOneShot(shoot);
-            }
-            else if (myId == ID.Blue && BlueAmmo < 1)
-            {
-                Debug.Log("IH");
-                GameObject.Find("Blue").GetComponent<ShootingGameController>().ToggleDirection();
-            }
+				if (ShootingGameController.blueAmmo > 0) {
 
-            Debug.Log(RedAmmo + " Red");
-            Debug.Log(BlueAmmo + " Blue");
-            // CheckAmmo()
+					ShootingGameController.blueAmmo--;
+					Instantiate (bulletPrefab, myObj.transform.position + offset, myRotation);
+					audioPlayer.PlayOneShot (shoot);
+				}
+				blueGuy.GetComponent<ShootingGameController>().ToggleDirection();
+               
+            }
         }
     }
+
     // Update is called once per frame
     void Hitsound()
     {
@@ -114,27 +126,21 @@ public class ShootingBulletController : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D other)
     {//play sound when players collide
 
-        if (other.gameObject.tag == "Blocker")
-        {
-
-        }
-        else if(other.gameObject.tag == "Player")
+		if(other.gameObject.tag == "Player")
         {
             if(other.gameObject.transform.name == "Red" && gameObject.tag != "Blocker")
             {
                 TextUpdater.blueScore = TextUpdater.blueScore + 1;
                 Hitsound();
-                Debug.Log("Crash RED");
+       
             }
 
             if(other.gameObject.transform.name == "Blue" && gameObject.tag != "Blocker")
             {
                 TextUpdater.redScore = TextUpdater.redScore + 1;
                 Hitsound();
-                Debug.Log("Crash Blue");
             }
-
-            Debug.Log("Crash");
+	
             Destroy(this.gameObject);
         }
        
@@ -142,26 +148,15 @@ public class ShootingBulletController : MonoBehaviour {
     }
 
     void Update () {
-        
+
+		// Sync ammo between the two scripts
         RedAmmo = ShootingGameController.redAmmo;
         BlueAmmo = ShootingGameController.blueAmmo;
+
+		// Have bullet constantly moving
         if (PauseController.paused == false)
         {
             transform.Translate(0, bulletSpeed, 0);
         }
-       
-        /*  
-            if(shot == true && myId == ID.Red)
-            {
-
-                transform.Translate(0,bulletSpeed,0);
-            }
-
-
-            if (shot == true && myId == ID.Blue)
-            {
-                transform.Translate(0, bulletSpeed, 0);
-            }
-            */
     }
 }
