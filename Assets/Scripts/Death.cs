@@ -118,7 +118,7 @@ public class Death : MonoBehaviour {
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
 		if (alive == true)

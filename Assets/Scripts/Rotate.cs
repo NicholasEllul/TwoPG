@@ -18,7 +18,8 @@ public class Rotate : MonoBehaviour
     public float volume;
 
 	// Only enable fixed speed if you are 
-	// manually setting the rotation and thrust
+	// manually setting the rotation and thrust variables.
+	// below. Modify values in editor. Used for debugging.
 	public bool fixedSpeed = false;
 	public int _rotationCoefficiant;
 	public int _thrust;
@@ -27,14 +28,13 @@ public class Rotate : MonoBehaviour
     private AudioSource _audi;
     private bool _clicked = false;
 
-
-
     public static bool controlsEnabled = true;
     public static byte scoreDebug = 1;
     public static bool paused = false;
 
+
     public enum DIRECTION
-    {
+    {// Direction that the player starts facing
         left,
         right
     }
